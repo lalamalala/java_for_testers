@@ -2,7 +2,8 @@ package ru.stqa.geometry.figures;
 
 public class Rectangle {
     public static void printRectangleArea(double a, double b) {
-        System.out.println("Площадь прямоугольника cо cторонами " + a + " и " + b + " = " + rectangleArea(a, b));
+        var text = String.format("Площадь прмоугольника cо cторонами %f и %f = %f", a, b, rectangleArea(a, b));
+        System.out.println(text);
     }
 
     private static double rectangleArea(double a, double b) {
