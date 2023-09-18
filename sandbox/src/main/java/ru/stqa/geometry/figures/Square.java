@@ -15,10 +15,12 @@ public record Square (double side) {
     // double  - in the function, indicate the type of the returned result (expression)
 
     public double area() {
+
         return this.side * this.side;
     }
 
     public double perimeter() {
+
         return 4 * this.side;
     }
 }

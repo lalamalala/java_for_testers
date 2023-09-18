@@ -13,9 +13,18 @@ public class SquareTests {
         Assertions.assertEquals(25.0, result);
     }
 
+
     @Test
-    void canCalculatePerimeter () {
-        Assertions.assertEquals(20.0, new Square(5.0).perimeter());
+    void canCalculateTriangleArea () {
+        var t = new Triangle(6.0,5.0, 2.2);
+        double result = Math.round(t.area() * 100.0) / 100.0;
+        Assertions.assertEquals(5.28, result);
     }
 
+    @Test
+    void canCalculateTrianglePerimeter () {
+        var t = new Triangle(6.0,5.0, 2.2);
+        var result = t.perimeter();
+        Assertions.assertEquals(13.2, result);
+    }
 }
