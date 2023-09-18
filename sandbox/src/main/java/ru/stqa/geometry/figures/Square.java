@@ -1,12 +1,8 @@
 package ru.stqa.geometry.figures;
 
 // class  - a group of functions are interconnected in meaning
-public class Square {
-   private double side;
+public record Square (double side) {
 
-    public Square(double side) {
-        this.side = side;
-    }
 
     // description of the object structure, declaration of variables
     // void - the function returns nothing
