@@ -1,16 +1,13 @@
-import java.io.File;
-
 public class Hello {
     public static void main(String[] args) {
-        try {
-            int z = calculate();
- //           System.out.println(z);
-            System.out.println("Hello,world");
-        } catch (ArithmeticException exception) {
-           // System.out.println(exception.getMessage());
-            exception.printStackTrace();
-        }
-
+            var x = 1;
+            var y = 0;
+            if ( y == 0) {
+                System.out.println("Division by zero is not allowed");
+            } else {
+                int z = divide(x, y);
+                System.out.println("Hello,world");
+            }
 
 
 
@@ -29,13 +26,6 @@ public class Hello {
         System.out.println(configFile.getAbsolutePath());
         System.out.println(configFile.exists()); */
 
-    }
-
-    private static int calculate() {
-        var x = 1;
-        var y = 1;
-        int z = divide(x, y);
-        return z;
     }
 
     private static int divide(int x, int y) {
