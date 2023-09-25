@@ -1,10 +1,18 @@
 package ru.stqa.geometry.figures;
 
-public record Triangle(
-        double a,
-        double b,
-        double c
-) {
+public record Triangle(double a, double b, double c) {
+
+    public Triangle {
+        if (a < 0 || b < 0 || c < 0) {
+            throw new IllegalArgumentException("Rectangle side should be non-negative");
+        }
+
+        if ( c < a + b || a < b + c || b < a +c ) {
+            throw new IllegalArgumentException("The sides of the triangle must satisfy the triangle equality condition");
+        }
+
+    }
+
     public static void printTriangleArea(Triangle t) {
         String text = String.format("Area of a Triangle with sides %f and %f, %f = %f", t.a, t.b, t.c, t.area());
         System.out.println(text);
