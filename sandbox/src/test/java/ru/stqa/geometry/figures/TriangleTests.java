@@ -22,12 +22,6 @@ public class TriangleTests {
     void cannotCreateTriangleWithNegativeSide() {
         try {
             new Triangle(-5.0, 3.0, 4.0);
-            // new Triangle(5.0, -3.0,4.0);
-            //        new Triangle(5.0, 3.0,-4.0);
-            //       new Triangle(5.0, 3.0,1.0);
-            //        new Triangle(1.0, 3.0,4.0);
-            //        new Triangle(5.0, 1.0,4.0);
-            //        new Triangle(5.0, 3.0,8.0);
             Assertions.fail();
         } catch (IllegalArgumentException exception) {
             //ok
@@ -38,19 +32,17 @@ public class TriangleTests {
     void cannotCreateTriangleWithWrongSide() {
         try {
             new Triangle(5.0, 3.0, 1.0);
-            //    new Triangle(1.0, 3.0,4.0);
-            //        new Triangle(5.0, 1.0,4.0);
-            //       new Triangle(5.0, 3.0,8.0);
             Assertions.fail();
         } catch (IllegalArgumentException exception) {
             //ok
         }
     }
 
- // @Test
-  // void testEquality2() {
- //      var t1 = new Triangle (3.0, 4.0, 5.0);
- //      var t2 = new Triangle (4.0, 5.0, 3.0);
- //     Assertions.assertEquals(t1,t2);
- //  }
+    @Test
+    void testEquality2() {
+        var t1 = new Triangle(3.0, 4.0, 5.0);
+        var t2 = new Triangle(4.0, 5.0, 3.0);
+     // 1  var t2 = new Triangle(4.0, 3.0, 5.0);
+        Assertions.assertEquals(t1, t2);
+    }
 }
