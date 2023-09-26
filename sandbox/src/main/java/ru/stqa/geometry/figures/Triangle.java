@@ -1,16 +1,35 @@
 package ru.stqa.geometry.figures;
 
-public record Triangle(double a, double b, double c) {
+import java.util.Objects;
+
+public record Triangle (double a, double b, double c) {
 
     public Triangle {
         if (a < 0 || b < 0 || c < 0) {
             throw new IllegalArgumentException("Rectangle side should be non-negative");
         }
 
-        if ( c < a + b || a < b + c || b < a +c ) {
-            throw new IllegalArgumentException("The sides of the triangle must satisfy the triangle equality condition");
+       if ( !(c < a + b) || !(a < b + c) || !(b < a + c) ) {
+          throw new IllegalArgumentException("The sides of the triangle must satisfy the triangle equality condition");
         }
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Triangle triangle = (Triangle) o;
+        return (Double.compare(triangle.a, this.a) == 0 && Double.compare(triangle.b, this.b) == 0 && Double.compare(triangle.c, this.c) == 0)
+                || (Double.compare(triangle.a, this.b) == 0 && Double.compare(triangle.b, this.a) == 0 && Double.compare(triangle.c, this.c) == 0)
+                || (Double.compare(triangle.a, this.c) == 0 && Double.compare(triangle.b, this.b) == 0 && Double.compare(triangle.c, this.a) == 0)
+                || (Double.compare(triangle.a, this.a) == 0 && Double.compare(triangle.b, this.c) == 0 && Double.compare(triangle.c, this.b) == 0)
+                || (Double.compare(triangle.a, this.c) == 0 && Double.compare(triangle.b, this.a) == 0 && Double.compare(triangle.c, this.b) == 0);
+    }
+
+    @Override
+    public int hashCode() {
+        return 1;
     }
 
     public static void printTriangleArea(Triangle t) {
