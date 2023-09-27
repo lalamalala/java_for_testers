@@ -8,7 +8,7 @@ public record Triangle(double a, double b, double c) {
         if (a < 0 || b < 0 || c < 0) {
             throw new IllegalArgumentException("Rectangle side should be non-negative");
         }
-        if (!(c < a + b) || !(a < b + c) || !(b < a + c)) {
+        if ((c > a + b) || (a > b + c) || (b > a + c)) {
             throw new IllegalArgumentException("The sides of the triangle must satisfy the triangle equality condition");
         }
     }
@@ -22,7 +22,8 @@ public record Triangle(double a, double b, double c) {
                 || (Double.compare(triangle.a, this.a) == 0 && Double.compare(triangle.b, this.c) == 0 && Double.compare(triangle.c, this.b) == 0)
                 || (Double.compare(triangle.a, this.b) == 0 && Double.compare(triangle.b, this.a) == 0 && Double.compare(triangle.c, this.c) == 0)
                 || (Double.compare(triangle.a, this.b) == 0 && Double.compare(triangle.b, this.c) == 0 && Double.compare(triangle.c, this.a) == 0)
-                || (Double.compare(triangle.a, this.c) == 0 && Double.compare(triangle.b, this.b) == 0 && Double.compare(triangle.c, this.a) == 0);
+                || (Double.compare(triangle.a, this.c) == 0 && Double.compare(triangle.b, this.b) == 0 && Double.compare(triangle.c, this.a) == 0)
+                || (Double.compare(triangle.a, this.c) == 0 && Double.compare(triangle.b, this.a) == 0 && Double.compare(triangle.c, this.b) == 0);
     }
 
     @Override

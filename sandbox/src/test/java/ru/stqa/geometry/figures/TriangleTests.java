@@ -13,9 +13,9 @@ public class TriangleTests {
 
     @Test
     void canCalculatePerimeter() {
-        var t = new Triangle(6.0, 5.0, 2.2);
+        var t = new Triangle(2.0, 3.0, 4.0);
         var result = t.perimeter();
-        Assertions.assertEquals(13.2, result);
+        Assertions.assertEquals(9.0, result);
     }
 
     @Test
@@ -40,8 +40,10 @@ public class TriangleTests {
 
     @Test
     void testEquality2() {
-        var t1 = new Triangle(3.0, 4.0, 5.0);
-        var t2 = new Triangle(4.0, 5.0, 3.0);
+   //     var t1 = new Triangle(3.0, 4.0, 5.0);
+     //   var t2 = new Triangle(4.0, 5.0, 3.0);
+        var t1 = new Triangle(2.0, 3.0, 4.0);
+        var t2 = new Triangle(4.0, 2.0, 3.0);
      // 1  var t2 = new Triangle(4.0, 3.0, 5.0);
         Assertions.assertEquals(t1, t2);
     }
