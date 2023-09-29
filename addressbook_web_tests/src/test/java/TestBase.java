@@ -1,9 +1,7 @@
+import model.ContactData;
 import model.GroupData;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class TestBase {
@@ -56,5 +54,103 @@ public class TestBase {
         driver.findElement(By.name("selected[]")).click();
         driver.findElement(By.name("delete")).click();
         driver.findElement(By.linkText("group page")).click();
+    }
+
+    protected void openCreateContactPage() {
+        driver.findElement(By.linkText("add new")).click();
+    }
+
+
+    void createContact(ContactData contact) {
+        driver.findElement(By.name("firstname")).click();
+        driver.findElement(By.name("firstname")).sendKeys(contact.firstname());
+        driver.findElement(By.name("middlename")).click();
+        driver.findElement(By.name("middlename")).sendKeys(contact.middlename());
+        driver.findElement(By.name("lastname")).click();
+        driver.findElement(By.name("lastname")).sendKeys(contact.lastname());
+        driver.findElement(By.name("nickname")).click();
+        driver.findElement(By.name("nickname")).sendKeys("nickname");
+        driver.findElement(By.name("title")).click();
+        driver.findElement(By.name("title")).sendKeys("title");
+        driver.findElement(By.name("company")).click();
+        driver.findElement(By.name("company")).sendKeys("company");
+        driver.findElement(By.name("address")).click();
+        driver.findElement(By.name("address")).sendKeys("address");
+        driver.findElement(By.name("theform")).click();
+        driver.findElement(By.name("home")).click();
+        driver.findElement(By.name("home")).sendKeys("home");
+        driver.findElement(By.name("theform")).click();
+        driver.findElement(By.name("mobile")).click();
+        driver.findElement(By.name("mobile")).sendKeys("mobile");
+        driver.findElement(By.name("work")).click();
+        driver.findElement(By.name("work")).sendKeys("work");
+        driver.findElement(By.name("fax")).click();
+        driver.findElement(By.name("fax")).sendKeys("fax");
+        driver.findElement(By.name("email")).click();
+        driver.findElement(By.name("email")).sendKeys("email");
+        driver.findElement(By.name("theform")).click();
+        driver.findElement(By.name("email2")).click();
+        driver.findElement(By.name("email2")).sendKeys("email2");
+        driver.findElement(By.name("theform")).click();
+        driver.findElement(By.name("email3")).click();
+        driver.findElement(By.name("email3")).sendKeys("email3");
+        driver.findElement(By.name("homepage")).click();
+        driver.findElement(By.name("homepage")).sendKeys("homepage");
+        driver.findElement(By.name("bday")).click();
+        {
+            WebElement dropdown = driver.findElement(By.name("bday"));
+            dropdown.findElement(By.xpath("//option[. = '1']")).click();
+        }
+        driver.findElement(By.name("bmonth")).click();
+        {
+            WebElement dropdown = driver.findElement(By.name("bmonth"));
+            dropdown.findElement(By.xpath("//option[. = 'January']")).click();
+        }
+        driver.findElement(By.name("theform")).click();
+        driver.findElement(By.name("byear")).click();
+        driver.findElement(By.name("byear")).sendKeys("byear");
+        driver.findElement(By.name("aday")).click();
+        {
+            WebElement dropdown = driver.findElement(By.name("aday"));
+            dropdown.findElement(By.xpath("//option[. = '-']")).click();
+        }
+        driver.findElement(By.name("aday")).click();
+        {
+            WebElement dropdown = driver.findElement(By.name("aday"));
+            dropdown.findElement(By.xpath("//option[. = '2']")).click();
+        }
+        driver.findElement(By.name("amonth")).click();
+        {
+            WebElement dropdown = driver.findElement(By.name("amonth"));
+            dropdown.findElement(By.xpath("//option[. = 'March']")).click();
+        }
+        driver.findElement(By.name("ayear")).click();
+        driver.findElement(By.name("ayear")).sendKeys("ayear");
+        driver.findElement(By.name("address2")).click();
+        driver.findElement(By.name("address2")).sendKeys("address2");
+        driver.findElement(By.name("phone2")).click();
+        driver.findElement(By.name("phone2")).sendKeys("phone2");
+        driver.findElement(By.name("notes")).click();
+        driver.findElement(By.name("notes")).sendKeys("notes");
+        driver.findElement(By.xpath("//input[@name='submit']")).click();
+        driver.findElement(By.linkText("home page")).click();
+    }
+
+    protected void openHomePage() {
+        if (!isElementPresent(By.name("searchstring"))) {
+            driver.findElement(By.linkText("home")).click();
+        }
+    }
+
+    protected boolean isContactPresent() {
+        return isElementPresent(By.name("selected[]"));
+    }
+
+
+    protected void removeContact() {
+      driver.findElement(By.name("selected[]")).click();
+      driver.findElement(By.xpath("//input[@value=\'Delete\']")).click();
+      driver.switchTo().alert().accept();
+      driver.findElement(By.linkText("home")).click();
     }
 }
