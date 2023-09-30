@@ -1,3 +1,5 @@
+package tests;
+
 import model.ContactData;
 import org.junit.jupiter.api.Test;
 
@@ -5,34 +7,34 @@ public class ContactCreationTests extends TestBase{
 
     @Test
     public void canCreateContact() {
-        openCreateContactPage();
-        createContact(new ContactData("Lala", "Byby", "GUG"));
+        app.openCreateContactPage();
+        app.createContact(new ContactData("Lala", "Byby", "GUG"));
     }
 
     @Test
     public void canCreateGroupWithFirstNameOnly() {
-        openCreateContactPage();
+        app.openCreateContactPage();
         var emptyContact = new ContactData();
         var contactWithFirstName = emptyContact.withFirstName("some name");
-        createContact(contactWithFirstName);
+        app.createContact(contactWithFirstName);
 
     }
 
     @Test
     public void canCreateGroupWithMiddleNameOnly() {
-        openCreateContactPage();
+        app.openCreateContactPage();
         var emptyContact = new ContactData();
         var contactWithMiddleName = emptyContact.withMiddleName("some name");
-        createContact(contactWithMiddleName);
+        app.createContact(contactWithMiddleName);
 
     }
 
     @Test
     public void canCreateGroupWithLastNameOnly() {
-        openCreateContactPage();
+        app.openCreateContactPage();
         var emptyContact = new ContactData();
         var contactWithLastName = emptyContact.withLastName("some name");
-        createContact(contactWithLastName);
+        app.createContact(contactWithLastName);
 
     }
 }
