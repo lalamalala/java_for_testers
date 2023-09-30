@@ -7,34 +7,30 @@ public class ContactCreationTests extends TestBase{
 
     @Test
     public void canCreateContact() {
-        app.openCreateContactPage();
-        app.createContact(new ContactData("Lala", "Byby", "GUG"));
+        app.contacts().openCreateContactPage();
+        app.contacts().createContact(new ContactData("Lala", "Byby", "GUG"));
     }
 
     @Test
     public void canCreateGroupWithFirstNameOnly() {
-        app.openCreateContactPage();
+        app.contacts().openCreateContactPage();
         var emptyContact = new ContactData();
         var contactWithFirstName = emptyContact.withFirstName("some name");
-        app.createContact(contactWithFirstName);
+        app.contacts().createContact(contactWithFirstName);
 
     }
 
     @Test
     public void canCreateGroupWithMiddleNameOnly() {
-        app.openCreateContactPage();
-        var emptyContact = new ContactData();
-        var contactWithMiddleName = emptyContact.withMiddleName("some name");
-        app.createContact(contactWithMiddleName);
+        app.contacts().openCreateContactPage();
+        app.contacts().createContact(new ContactData().withMiddleName("some name"));
 
     }
 
     @Test
     public void canCreateGroupWithLastNameOnly() {
-        app.openCreateContactPage();
-        var emptyContact = new ContactData();
-        var contactWithLastName = emptyContact.withLastName("some name");
-        app.createContact(contactWithLastName);
+        app.contacts().openCreateContactPage();
+        app.contacts().createContact(new ContactData().withLastName("some name"));
 
     }
 }
