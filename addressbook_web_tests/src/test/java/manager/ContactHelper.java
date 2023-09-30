@@ -11,19 +11,19 @@ public class ContactHelper {
         this.manager = manager;
     }
 
+    public boolean isContactPresent() {
+        return manager.isElementPresent(By.name("selected[]"));
+    }
+
     public void openHomePage() {
         if (!manager.isElementPresent(By.name("searchstring"))) {
             manager.driver.findElement(By.linkText("home")).click();
         }
     }
-
     public void openCreateContactPage() {
         manager.driver.findElement(By.linkText("add new")).click();
     }
 
-    public boolean isContactPresent() {
-        return manager.isElementPresent(By.name("selected[]"));
-    }
 
     public void removeContact() {
         manager.driver.findElement(By.name("selected[]")).click();
@@ -106,6 +106,4 @@ public class ContactHelper {
         manager.driver.findElement(By.xpath("//input[@name='submit']")).click();
         manager.driver.findElement(By.linkText("home page")).click();
     }
-
-
 }

@@ -2,6 +2,7 @@ package manager;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class ApplicationManager {
     protected  WebDriver driver;
@@ -31,9 +32,16 @@ public class ApplicationManager {
         return contacts;
     }
 
-    public void init() {
+    public void init(String browser) {
         if (driver == null) {
-            driver = new ChromeDriver();
+            if ("chrome".equals(browser)) {
+                driver = new ChromeDriver();
+            } else if ("firefox".equals(browser)) {
+                    driver = new FirefoxDriver();
+
+            } else {
+                throw  new IllegalArgumentException(String.format("Unknown browser %s", browser));
+            }
             Runtime.getRuntime().addShutdownHook(new Thread(driver::quit));
             driver.get("http://localhost/addressbook/");
             driver.manage().window().setSize(new Dimension(516, 254));

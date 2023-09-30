@@ -11,22 +11,15 @@ public class GroupHelper {
         this.manager = manager;
     }
 
-    public void openGroupsPage() {
-        if (!manager.isElementPresent(By.name("new"))) {
-            manager.driver.findElement(By.linkText("groups")).click();
-        }
-    }
-
     public boolean isGroupPresent() {
         openGroupsPage();
         return manager.isElementPresent(By.name("selected[]"));
     }
 
-    public void removeGroup() {
-        openGroupsPage();
-        manager.driver.findElement(By.name("selected[]")).click();
-        manager.driver.findElement(By.name("delete")).click();
-        manager.driver.findElement(By.linkText("group page")).click();
+    public void openGroupsPage() {
+        if (!manager.isElementPresent(By.name("new"))) {
+            manager.driver.findElement(By.linkText("groups")).click();
+        }
     }
 
     public void createGroup(GroupData group) {
@@ -41,4 +34,13 @@ public class GroupHelper {
         manager.driver.findElement(By.name("submit")).click();
         manager.driver.findElement(By.linkText("group page")).click();
     }
+
+    public void removeGroup() {
+        openGroupsPage();
+        manager.driver.findElement(By.name("selected[]")).click();
+        manager.driver.findElement(By.name("delete")).click();
+        manager.driver.findElement(By.linkText("group page")).click();
+    }
+
+
 }
