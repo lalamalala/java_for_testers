@@ -10,10 +10,6 @@ public class ContactHelper extends HelperBase {
         super(manager);
     }
 
-    public boolean isContactPresent() {
-        openHomePage();
-        return manager.isElementPresent(By.name("selected[]"));
-    }
 
     public void openHomePage() {
         if (!manager.isElementPresent(By.name("searchstring"))) {
@@ -106,5 +102,10 @@ public class ContactHelper extends HelperBase {
 //        manager.driver.findElement(By.name("email3")).sendKeys("email3");
 //        manager.driver.findElement(By.name("homepage")).click();
 //        manager.driver.findElement(By.name("homepage")).sendKeys("homepage");
+    }
+
+    public int getCount() {
+        openHomePage();
+        return manager.driver.findElements(By.name("selected[]")).size();
     }
 }
