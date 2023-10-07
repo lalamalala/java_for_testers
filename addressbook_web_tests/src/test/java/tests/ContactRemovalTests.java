@@ -18,4 +18,13 @@ public class ContactRemovalTests extends TestBase {
     Assertions.assertEquals(contactCount - 1, newContactCount);
   }
 
+  @Test
+  void canRemoveAllContactsAtOnce () {
+    if (app.contacts().getCount() == 0) {
+      app.contacts().createContact(new ContactData("Lala", "Byby", "GUG"));
+    }
+    app.contacts().removeAllContacts();
+    Assertions.assertEquals(0,app.contacts().getCount());
+  }
+
 }

@@ -2,7 +2,6 @@ package manager;
 
 import model.ContactData;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 public class ContactHelper extends HelperBase {
 
@@ -31,7 +30,15 @@ public class ContactHelper extends HelperBase {
     public void removeContact() {
         openHomePage();
         selectContact();
-        removeSelectedContact();
+        removeSelectedContacts();
+        manager.driver.switchTo().alert().accept();
+        openHomePage();
+    }
+
+    public void removeAllContacts() {
+        openHomePage();
+        selectAllContacts();
+        removeSelectedContacts();
         manager.driver.switchTo().alert().accept();
         openHomePage();
     }
@@ -46,6 +53,19 @@ public class ContactHelper extends HelperBase {
 
     }
 
+    public int getCount() {
+        openHomePage();
+        return manager.driver.findElements(By.name("selected[]")).size();
+    }
+
+
+
+    private void selectAllContacts() {
+        var checkboxes =  manager.driver.findElements(By.name("selected[]"));
+        for (var checkbox: checkboxes) {
+            checkbox.click();
+        }
+    }
     private void submitContactModification() {
         click(By.name("update"));
     }
@@ -54,7 +74,7 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//*[@id=\"maintable\"]/tbody/tr[2]/td[8]/a/img"));
     }
 
-    private void removeSelectedContact() {
+    private void removeSelectedContacts() {
         click(By.xpath("//input[@value=\'Delete\']"));
     }
 
@@ -104,8 +124,5 @@ public class ContactHelper extends HelperBase {
 //        manager.driver.findElement(By.name("homepage")).sendKeys("homepage");
     }
 
-    public int getCount() {
-        openHomePage();
-        return manager.driver.findElements(By.name("selected[]")).size();
-    }
+
 }
