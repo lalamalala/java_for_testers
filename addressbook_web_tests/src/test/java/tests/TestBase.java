@@ -17,12 +17,16 @@ public class TestBase {
 
     }
 
-    public String randomString(int n) {
+    public static String randomString(int n) {
         var result = "test-";
         var rnd = new Random();
         for (int i = 0; i < n; i++) {
             result = result + (char)('a' + rnd.nextInt(26));
         }
+
+     //   if (n < 20) {
+     //       result = result + '\'';
+     //   }
         return result;
     }
 

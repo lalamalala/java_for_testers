@@ -26,7 +26,7 @@ public class ContactCreationTests extends TestBase{
             app.contacts().createContact(new ContactData(randomString(i), "Byby", "GUG"));
 
         }
-        
+
         int newContactCount = app.contacts().getCount();
         Assertions.assertEquals(contactCount + n, newContactCount);
 
