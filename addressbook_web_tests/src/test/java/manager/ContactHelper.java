@@ -1,7 +1,11 @@
 package manager;
 
 import model.ContactData;
+import model.GroupData;
 import org.openqa.selenium.By;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends HelperBase {
 
@@ -27,9 +31,9 @@ public class ContactHelper extends HelperBase {
         openHomePage();
     }
 
-    public void removeContact() {
+    public void removeContact(ContactData contact) {
         openHomePage();
-        selectContact();
+        selectContact(contact);
         removeSelectedContacts();
         manager.driver.switchTo().alert().accept();
         openHomePage();
@@ -45,7 +49,7 @@ public class ContactHelper extends HelperBase {
 
     public void modifyContact (ContactData modifiedContact) {
         openHomePage();
-        selectContact();
+        selectContact(null);
         initContactModification();
         fillContactForm(modifiedContact);
         submitContactModification();
@@ -78,11 +82,24 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//input[@value=\'Delete\']"));
     }
 
-    private void selectContact() {
-        click(By.name("selected[]"));
+    private void selectContact(ContactData contact) {
+        click(By.cssSelector(String.format("input[value='%s']", contact.id())));
     }
 
+    public List <ContactData> getList() {
+        openHomePage();
+        var contacts = new ArrayList<ContactData>();
+        var tableRows = manager.driver.findElements(By.xpath("//tr[@name=entry]"));
+        for (var tableRow : tableRows) {
+            var lastname = tableRow.getText();
+            var firstname = tableRow.getText();
+            var checkbox = tableRow.findElement(By.name("selected[]"));
+            var id = checkbox.getAttribute("value");
+            contacts.add(new ContactData().withId(id).withLastName(lastname));
 
+        }
+        return contacts;
+    }
 
     private void submitContactCreation() {
         click(By.xpath("//input[@name='submit']"));
@@ -123,6 +140,7 @@ public class ContactHelper extends HelperBase {
 //        manager.driver.findElement(By.name("homepage")).click();
 //        manager.driver.findElement(By.name("homepage")).sendKeys("homepage");
     }
+
 
 
 }
