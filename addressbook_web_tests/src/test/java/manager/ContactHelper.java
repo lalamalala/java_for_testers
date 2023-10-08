@@ -47,9 +47,9 @@ public class ContactHelper extends HelperBase {
         openHomePage();
     }
 
-    public void modifyContact (ContactData modifiedContact) {
+    public void modifyContact (ContactData contact,ContactData modifiedContact) {
         openHomePage();
-        selectContact(null);
+        selectContact(contact);
         initContactModification();
         fillContactForm(modifiedContact);
         submitContactModification();
@@ -89,15 +89,16 @@ public class ContactHelper extends HelperBase {
     public List <ContactData> getList() {
         openHomePage();
         var contacts = new ArrayList<ContactData>();
-        var tableRows = manager.driver.findElements(By.xpath("//tr[@name=entry]"));
+        var tableRows = manager.driver.findElements(By.xpath("//tr[@name=\'entry\']"));
         for (var tableRow : tableRows) {
-            var lastname = tableRow.getText();
-            var firstname = tableRow.getText();
+
+            var lastname = tableRow.findElement(By.cssSelector("td:nth-child(2)")).getText();
+            var firstname = tableRow.findElement(By.cssSelector("td:nth-child(3)")).getText();
             var checkbox = tableRow.findElement(By.name("selected[]"));
             var id = checkbox.getAttribute("value");
-            contacts.add(new ContactData().withId(id).withLastName(lastname));
-
+            contacts.add(new ContactData().withId(id).withFirstName(firstname).withLastName(lastname));
         }
+
         return contacts;
     }
 

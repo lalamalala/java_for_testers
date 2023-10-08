@@ -22,8 +22,11 @@ public class GroupModificationTest extends TestBase {
         var testData = new GroupData().withName("modified name");
 
         app.groups().modifyGroups(oldGroups.get(index), testData);
+
         var newGroups = app.groups().getList();
+
         var expectedList = new ArrayList<>(oldGroups);
+
         expectedList.set(index, testData.withID(oldGroups.get(index).id()));
         Comparator<GroupData> compareById = (o1, o2) -> {
             return Integer.compare(Integer.parseInt(o1.id()), Integer.parseInt(o2.id()));
