@@ -21,8 +21,7 @@ public class ContactCreationTests extends TestBase{
                     result.add(new ContactData()
                             .withFirstName(firstname)
                             .withMiddleName(middlename)
-                            .withLastName(lastname)
-                            .withPhoto(""));
+                            .withLastName(lastname));
                 }
             }
         }
@@ -30,8 +29,7 @@ public class ContactCreationTests extends TestBase{
             result.add(new ContactData()
                     .withFirstName(randomString(i * 10))
                     .withMiddleName(randomString(i * 10))
-                    .withLastName(randomString(i * 10))
-                    .withPhoto(""));
+                    .withLastName(randomString(i * 10)));
         }
         return result;
     }
@@ -60,7 +58,7 @@ public class ContactCreationTests extends TestBase{
 
 
         var expectedList = new ArrayList<>(oldContacts);
-        expectedList.add(contact.withId(newContacts.get(newContacts.size() - 1).id()).withMiddleName("").withPhoto(""));
+        expectedList.add(contact.withId(newContacts.get(newContacts.size() - 1).id()).withMiddleName("").withPhoto("src/test/resources/images/avatar.png"));
         expectedList.sort(compareById);
 
         Assertions.assertEquals(newContacts, expectedList);
