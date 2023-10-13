@@ -2,6 +2,7 @@ package tests;
 
 import model.ContactData;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -20,7 +21,8 @@ public class ContactCreationTests extends TestBase{
                     result.add(new ContactData()
                             .withFirstName(firstname)
                             .withMiddleName(middlename)
-                            .withLastName(lastname));
+                            .withLastName(lastname)
+                            .withPhoto(""));
                 }
             }
         }
@@ -28,11 +30,21 @@ public class ContactCreationTests extends TestBase{
             result.add(new ContactData()
                     .withFirstName(randomString(i * 10))
                     .withMiddleName(randomString(i * 10))
-                    .withLastName(randomString(i * 10)));
+                    .withLastName(randomString(i * 10))
+                    .withPhoto(""));
         }
         return result;
     }
+    @Test
+    public void canCreateContacts() {
+        var contact = new ContactData()
+                .withFirstName(randomString(10))
+                        .withLastName(randomString(10))
+                                .withPhoto("src/test/resources/images/avatar.png");
+        app.contacts().createContact(contact);
 
+
+    }
 
     @ParameterizedTest
     @MethodSource("contactProvider")
@@ -48,7 +60,7 @@ public class ContactCreationTests extends TestBase{
 
 
         var expectedList = new ArrayList<>(oldContacts);
-        expectedList.add(contact.withId(newContacts.get(newContacts.size() - 1).id()).withMiddleName(""));
+        expectedList.add(contact.withId(newContacts.get(newContacts.size() - 1).id()).withMiddleName("").withPhoto(""));
         expectedList.sort(compareById);
 
         Assertions.assertEquals(newContacts, expectedList);
@@ -57,7 +69,7 @@ public class ContactCreationTests extends TestBase{
 
     public static List<ContactData> negativeContactProvider() {
         var result = new ArrayList<ContactData>(List.of(
-                new ContactData("", "first name'", "sfsfds","sdfdsf")));
+                new ContactData("", "first name'", "sfsfds","sdfdsf", "src/test/resources/images/avatar.png")));
         return result;
     }
 
