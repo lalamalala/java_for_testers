@@ -36,7 +36,7 @@ public class ContactCreationTests extends TestBase{
 //        }
 
 //        var json = "";
-//        try (var reader = new FileReader("groups.json");
+//        try (var reader = new FileReader("contacts.json");
 //        var breader = new BufferedReader(reader)
 //        ) {
 //            var line = breader.readLine();
@@ -46,7 +46,7 @@ public class ContactCreationTests extends TestBase{
 //            }
 //        }
 
-        var json = Files.readString(Paths.get("groups.json"));
+        var json = Files.readString(Paths.get("contacts.json"));
         ObjectMapper mapper = new ObjectMapper(); // create once, reus
         var value = mapper.readValue(json, new TypeReference<List<ContactData>>(){});
         result.addAll(value);
