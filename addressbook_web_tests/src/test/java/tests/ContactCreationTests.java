@@ -58,23 +58,23 @@ public class ContactCreationTests extends TestBase{
         app.contacts().createContact(contact);
     }
 
-//    @Test
-//    public void canCreateContactsInGroup() {
-//        var contact = new ContactData()
-//                .withFirstName(CommonFunctions.randomString(10))
-//                .withLastName(CommonFunctions.randomString(10))
-//                .withPhoto(randomFile("src/test/resources/images"));
-//
-//        if (app.hbm().getGroupCount() == 0) {
-//            app.hbm().createGroup(new GroupData("", "1", "2", "3"));
-//        }
-//        var group = app.hbm().getGroupList().get(0);
-//
-//        var oldRelated = app.hbm().getContactsInGroup(group);
-//        app.contacts().createContact(contact, group);
-//        var newRelated = app.hbm().getContactsInGroup(group);
-//        Assertions.assertEquals(oldRelated.size() + 1, newRelated.size());
-//    }
+    @Test
+    public void canCreateContactsInGroup() {
+        var contact = new ContactData()
+                .withFirstName(CommonFunctions.randomString(10))
+                .withLastName(CommonFunctions.randomString(10))
+                .withPhoto(randomFile("src/test/resources/images"));
+
+        if (app.hbm().getGroupCount() == 0) {
+            app.hbm().createGroup(new GroupData("", "1", "2", "3"));
+        }
+        var group = app.hbm().getGroupList().get(0);
+
+        var oldRelated = app.hbm().getContactsInGroup(group);
+        app.contacts().createContact(contact, group);
+        var newRelated = app.hbm().getContactsInGroup(group);
+        Assertions.assertEquals(oldRelated.size() + 1, newRelated.size());
+    }
 
     @ParameterizedTest
     @MethodSource("contactProvider")

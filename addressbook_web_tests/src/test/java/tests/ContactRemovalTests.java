@@ -1,6 +1,8 @@
 package tests;
 
+import common.CommonFunctions;
 import model.ContactData;
+import model.GroupData;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -27,13 +29,36 @@ public class ContactRemovalTests extends TestBase {
     Assertions.assertEquals(newContacts, expectedList);
   }
 
+
+
+  @Test
+  public void canDeleteContactFromGroup() {
+    if (app.hbm().getGroupCount() == 0) {
+      app.hbm().createGroup(new GroupData("", "1", "2", "3"));
+      var contact = new ContactData()
+              .withFirstName(CommonFunctions.randomString(10))
+              .withLastName(CommonFunctions.randomString(10))
+              .withPhoto(randomFile("src/test/resources/images"));
+      var group = app.hbm().getGroupList().get(0);
+      app.contacts().createContact(contact, group);
+    }
+
+
+    var group = app.hbm().getGroupList().get(0);
+
+    var oldRelated = app.hbm().getContactsInGroup(group);
+    app.contacts().deleteContact(group);
+    var newRelated = app.hbm().getContactsInGroup(group);
+    Assertions.assertEquals(oldRelated.size() - 1, newRelated.size());
+  }
+
+
   @Test
   void canRemoveAllContactsAtOnce () {
-    if (app.hbm().getGroupCount() == 0) {
+    if (app.hbm().getContactCount() == 0) {
       app.hbm().createContact(new ContactData("", "Lala", "Byby", "GUG","src/test/resources/images/avatar.png"));
     }
     app.contacts().removeAllContacts();
     Assertions.assertEquals(0,app.hbm().getContactCount());
   }
-
 }

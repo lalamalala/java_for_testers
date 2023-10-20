@@ -45,6 +45,7 @@ public class ContactRecord {
     public String address2 = "";
     public String phone2 = "";
     public String notes = "";
+    public String photo = "";
 
     public Date deprecated = new Date();
 
@@ -56,12 +57,13 @@ public class ContactRecord {
 
 
     public ContactRecord() {}
-    public ContactRecord(int id, String firstname, String middlename, String lastname) {
+    public ContactRecord(int id, String firstname, String middlename, String lastname, String photo) {
 
         this.id = id;
         this.firstname = firstname;
         this.middlename = middlename;
         this.lastname = lastname;
+        this.photo = photo;
     }
 
 }

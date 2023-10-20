@@ -40,6 +40,18 @@ public class ContactHelper extends HelperBase {
         openHomePage();
     }
 
+    public void deleteContact(GroupData group) {
+        openHomePage();
+        selectGroupHomePage(group);
+        click(By.name("selected[]"));
+        submitRemoveFromGroup();
+        openHomePage();
+    }
+
+    private void selectGroupHomePage(GroupData group) {
+        new Select(manager.driver.findElement(By.name("group"))).selectByValue(group.id());
+    }
+
     private void selectGroup(GroupData group) {
         new Select(manager.driver.findElement(By.name("new_group"))).selectByValue(group.id());
     }
@@ -118,6 +130,10 @@ public class ContactHelper extends HelperBase {
 
     private void submitContactCreation() {
         click(By.xpath("//input[@name='submit']"));
+    }
+
+    private void submitRemoveFromGroup() {
+        click(By.xpath("//input[@name='remove']"));
     }
 
     private void fillContactForm (ContactData contact) {

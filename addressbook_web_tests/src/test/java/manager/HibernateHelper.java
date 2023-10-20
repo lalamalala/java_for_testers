@@ -70,7 +70,7 @@ public class HibernateHelper extends HelperBase {
         if ("".equals(id)) {
             id = "0";
         }
-        return new ContactRecord(Integer.parseInt(id) , data.firstname(), data.middlename(), data.lastname());
+        return new ContactRecord(Integer.parseInt(id) , data.firstname(), data.middlename(), data.lastname(), data.photo());
     }
 
     public List<GroupData> getGroupList() {
