@@ -29,11 +29,11 @@ public class ContactRemovalTests extends TestBase {
 
   @Test
   void canRemoveAllContactsAtOnce () {
-    if (app.contacts().getCount() == 0) {
-      app.contacts().createContact(new ContactData("", "Lala", "Byby", "GUG","src/test/resources/images/avatar.png"));
+    if (app.hbm().getGroupCount() == 0) {
+      app.hbm().createContact(new ContactData("", "Lala", "Byby", "GUG","src/test/resources/images/avatar.png"));
     }
     app.contacts().removeAllContacts();
-    Assertions.assertEquals(0,app.contacts().getCount());
+    Assertions.assertEquals(0,app.hbm().getContactCount());
   }
 
 }
