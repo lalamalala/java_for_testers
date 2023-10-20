@@ -13,6 +13,8 @@ public class ApplicationManager {
     private ContactHelper contacts;
 
     private JdbcHelper jdbc;
+
+    private HibernateHelper hbm;
     private Properties properties;
 
     public LoginHelper session () { // returns a link to the helper
@@ -42,6 +44,13 @@ public class ApplicationManager {
             jdbc = new JdbcHelper(this);
         }
         return jdbc;
+    }
+
+    public HibernateHelper hbm () { // returns a link to the helper
+        if (hbm == null) {
+            hbm = new HibernateHelper(this);
+        }
+        return hbm;
     }
 
     public void init(String browser, Properties properties) {
