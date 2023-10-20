@@ -12,10 +12,10 @@ import java.util.Random;
 public class ContactModificationTest extends TestBase {
     @Test
     void canModifyContact () {
-        if (app.contacts().getCount() == 0) {
-            app.contacts().createContact(new ContactData("", "", "", "","src/test/resources/images/avatar.png"));
+        if (app.hbm().getContactCount() == 0) {
+            app.hbm().createContact(new ContactData("", "", "", "","src/test/resources/images/avatar.png"));
         }
-        var oldContacts = app.contacts().getList();
+        var oldContacts = app.hbm().getContactList();
         var rnd = new Random();
         var index = rnd.nextInt(oldContacts.size());
 
@@ -30,7 +30,7 @@ public class ContactModificationTest extends TestBase {
             return Integer.compare(Integer.parseInt(o1.id()), Integer.parseInt(o2.id()));
         };
         
-        var newContacts = app.contacts().getList();
+        var newContacts = app.hbm().getContactList();
         newContacts.sort(compareById);
         expectedList.sort(compareById);
 

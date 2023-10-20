@@ -10,9 +10,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -53,7 +50,7 @@ public class ContactCreationTests extends TestBase{
         return result;
     }
     @Test
-    public void canCreateContacts() {
+    public void canCreateSingleRandomContact() {
         var contact = new ContactData()
                 .withFirstName(CommonFunctions.randomString(10))
                         .withLastName(CommonFunctions.randomString(10))
@@ -81,10 +78,10 @@ public class ContactCreationTests extends TestBase{
 
     @ParameterizedTest
     @MethodSource("contactProvider")
-    public void canCreateMultipleContacts(ContactData contact) {
-        var oldContacts = app.contacts().getList();
+    public void canCreateContacts(ContactData contact) {
+        var oldContacts = app.hbm().getContactList();
         app.contacts().createContact(contact);
-        var newContacts = app.contacts().getList();
+        var newContacts = app.hbm().getContactList();
         Comparator<ContactData> compareById = (o1, o2) -> {
             return Integer.compare(Integer.parseInt(o1.id()), Integer.parseInt(o2.id()));
         };
@@ -93,7 +90,7 @@ public class ContactCreationTests extends TestBase{
 
 
         var expectedList = new ArrayList<>(oldContacts);
-        expectedList.add(contact.withId(newContacts.get(newContacts.size() - 1).id()).withMiddleName("").withPhoto("src/test/resources/images/avatar.png"));
+        expectedList.add(contact.withId(newContacts.get(newContacts.size() - 1).id()).withPhoto("src/test/resources/images/avatar.png"));
         expectedList.sort(compareById);
 
         Assertions.assertEquals(newContacts, expectedList);

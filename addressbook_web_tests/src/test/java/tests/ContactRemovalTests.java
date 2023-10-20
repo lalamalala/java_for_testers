@@ -12,15 +12,15 @@ public class ContactRemovalTests extends TestBase {
   @Test
   public void canRemoveContact() {
     app.contacts().openHomePage();
-    if (app.contacts().getCount() == 0) {
-      app.contacts().createContact(new ContactData("", "Lala", "Byby", "GUG","src/test/resources/images/avatar.png"));
+    if (app.hbm().getContactCount() == 0) {
+      app.hbm().createContact(new ContactData("", "Lala", "Byby", "GUG","src/test/resources/images/avatar.png"));
     }
 
-    var oldContacts = app.contacts().getList();
+    var oldContacts = app.hbm().getContactList();
     var rnd = new Random();
     var index = rnd.nextInt(oldContacts.size());
     app.contacts().removeContact(oldContacts.get(index));
-    var newContacts = app.contacts().getList();
+    var newContacts = app.hbm().getContactList();
     var expectedList = new ArrayList<>(oldContacts);
     expectedList.remove(index);
 
