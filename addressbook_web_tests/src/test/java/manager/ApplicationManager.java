@@ -11,6 +11,8 @@ public class ApplicationManager {
     private LoginHelper session;
     private GroupHelper groups;
     private ContactHelper contacts;
+
+    private JdbcHelper jdbc;
     private Properties properties;
 
     public LoginHelper session () { // returns a link to the helper
@@ -33,6 +35,13 @@ public class ApplicationManager {
             contacts = new ContactHelper(this);
         }
         return contacts;
+    }
+
+    public JdbcHelper jdbc () { // returns a link to the helper
+        if (jdbc == null) {
+            jdbc = new JdbcHelper(this);
+        }
+        return jdbc;
     }
 
     public void init(String browser, Properties properties) {
