@@ -1,7 +1,6 @@
 package tests;
 
 import manager.ApplicationManager;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -27,8 +26,8 @@ public class TestBase {
 
     }
 
-    @AfterAll
-    public static void  checkDataBaseConsistency () {
+    @AfterEach
+    void  checkDataBaseConsistency () {
         app.jdbc().checkConsistency();
     }
 
