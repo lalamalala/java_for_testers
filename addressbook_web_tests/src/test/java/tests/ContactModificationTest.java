@@ -1,5 +1,6 @@
 package tests;
 
+import common.CommonFunctions;
 import model.ContactData;
 import model.GroupData;
 import org.junit.jupiter.api.Assertions;
@@ -36,4 +37,38 @@ public class ContactModificationTest extends TestBase {
 
         Assertions.assertEquals(newContacts, expectedList);
     }
+
+    @Test
+    public void canAddGroupInContact() {
+        if (app.hbm().getGroupCount() == 0) {
+            app.hbm().createGroup(new GroupData("", "1", "2", "3"));
+        }
+        if (app.hbm().getContactCount() == 0) {
+            app.hbm().createContact(new ContactData()
+                    .withFirstName(CommonFunctions.randomString(10))
+                    .withLastName(CommonFunctions.randomString(10))
+                    .withPhoto(randomFile("src/test/resources/images")));
+        }
+
+        var group = app.hbm().getGroupList().get(0);
+
+        var oldContacts = app.hbm().getContactList();
+        var rnd = new Random();
+        var index = rnd.nextInt(oldContacts.size());
+
+        app.contacts().addGroup(group);
+
+        Comparator<ContactData> compareById = (o1, o2) -> {
+            return Integer.compare(Integer.parseInt(o1.id()), Integer.parseInt(o2.id()));
+        };
+
+        var newContacts = app.hbm().getContactList();
+        newContacts.sort(compareById);
+        oldContacts.sort(compareById);
+
+        Assertions.assertEquals(newContacts, oldContacts);
+
+
+    }
+
 }

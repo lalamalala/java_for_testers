@@ -40,16 +40,32 @@ public class ContactHelper extends HelperBase {
         openHomePage();
     }
 
-    public void deleteContact(GroupData group) {
-        openHomePage();
-        selectGroupHomePage(group);
+    public void deleteContactFromGroup(GroupData group) {
+        click(By.linkText("home"));
+        selectGroupOnHomePage(group);
         click(By.name("selected[]"));
         submitRemoveFromGroup();
         openHomePage();
     }
 
-    private void selectGroupHomePage(GroupData group) {
+    public void addGroup(GroupData group) {
+        click(By.linkText("home"));
+        selectGroupForAddOnHomePage(group);
+        click(By.name("selected[]"));
+        submitAddFromGroup();
+        click(By.linkText("home"));
+    }
+
+    private void selectGroupOnHomePage(GroupData group) {
         new Select(manager.driver.findElement(By.name("group"))).selectByValue(group.id());
+    }
+
+    private void selectAllGroupOnHomePage() {
+        new Select(manager.driver.findElement(By.name("group"))).selectByValue("");
+    }
+
+    private void selectGroupForAddOnHomePage(GroupData group) {
+        new Select(manager.driver.findElement(By.name("to_group"))).selectByValue(group.id());
     }
 
     private void selectGroup(GroupData group) {
@@ -58,6 +74,7 @@ public class ContactHelper extends HelperBase {
 
     public void removeContact(ContactData contact) {
         openHomePage();
+        selectAllGroupOnHomePage();
         selectContact(contact);
         removeSelectedContacts();
         manager.driver.switchTo().alert().accept();
@@ -65,7 +82,8 @@ public class ContactHelper extends HelperBase {
     }
 
     public void removeAllContacts() {
-        openHomePage();
+        click(By.linkText("home"));
+        selectAllGroupOnHomePage();
         selectAllContacts();
         removeSelectedContacts();
         manager.driver.switchTo().alert().accept();
@@ -134,6 +152,10 @@ public class ContactHelper extends HelperBase {
 
     private void submitRemoveFromGroup() {
         click(By.xpath("//input[@name='remove']"));
+    }
+
+    private void submitAddFromGroup() {
+        click(By.xpath("//input[@name='add']"));
     }
 
     private void fillContactForm (ContactData contact) {
