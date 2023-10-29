@@ -16,13 +16,14 @@ public class ContactRecord {
     public String firstname;
     public String middlename;
     public String lastname;
+    public String home;
 
     public String nickname = "";
     public String company = "";
     public String title = "";
 
     public String address = "";
-    public String home ="";
+
     public String mobile = "";
 
     public String work= "";

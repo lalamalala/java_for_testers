@@ -16,7 +16,7 @@ public class ContactInfoTests extends TestBase {
                     .withFirstName(CommonFunctions.randomString(10))
                     .withLastName(CommonFunctions.randomString(10))
                     .withPhoto(randomFile("src/test/resources/images"))
-                    .withHome("1234567")
+                    .withHome(CommonFunctions.randomString(10))
                     .withWork("1234567")
                     .withMobile("123")
                     .withSecondary("12"));
