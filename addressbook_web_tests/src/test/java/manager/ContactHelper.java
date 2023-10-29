@@ -3,7 +3,6 @@ package manager;
 import model.ContactData;
 import model.GroupData;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
@@ -171,35 +170,6 @@ public class ContactHelper extends HelperBase {
         type(By.name("lastname"), contact.lastname());
         attach(By.name("photo"),contact.photo());
 
-
-//        manager.driver.findElement(By.name("nickname")).click();
-//        manager.driver.findElement(By.name("nickname")).sendKeys("nickname");
-//        manager.driver.findElement(By.name("title")).click();
-//        manager.driver.findElement(By.name("title")).sendKeys("title");
-//        manager.driver.findElement(By.name("company")).click();
-//        manager.driver.findElement(By.name("company")).sendKeys("company");
-//        manager.driver.findElement(By.name("address")).click();
-//        manager.driver.findElement(By.name("address")).sendKeys("address");
-//        manager.driver.findElement(By.name("theform")).click();
-//        manager.driver.findElement(By.name("home")).click();
-//        manager.driver.findElement(By.name("home")).sendKeys("home");
-//        manager.driver.findElement(By.name("theform")).click();
-//        manager.driver.findElement(By.name("mobile")).click();
-//        manager.driver.findElement(By.name("mobile")).sendKeys("mobile");
-//        manager.driver.findElement(By.name("work")).click();
-//        manager.driver.findElement(By.name("work")).sendKeys("work");
-//        manager.driver.findElement(By.name("fax")).click();
-//        manager.driver.findElement(By.name("fax")).sendKeys("fax");
-//        manager.driver.findElement(By.name("email")).click();
-//        manager.driver.findElement(By.name("email")).sendKeys("email");
-//        manager.driver.findElement(By.name("theform")).click();
-//        manager.driver.findElement(By.name("email2")).click();
-//        manager.driver.findElement(By.name("email2")).sendKeys("email2");
-//        manager.driver.findElement(By.name("theform")).click();
-//        manager.driver.findElement(By.name("email3")).click();
-//        manager.driver.findElement(By.name("email3")).sendKeys("email3");
-//        manager.driver.findElement(By.name("homepage")).click();
-//        manager.driver.findElement(By.name("homepage")).sendKeys("homepage");
     }
 
 
@@ -209,6 +179,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public Map<String, String > getPhones() {
+        openHomePage();
         var result = new HashMap<String, String>();
         List<WebElement> rows = manager.driver.findElements(By.name("entry"));
         for (WebElement row : rows) {
@@ -218,4 +189,49 @@ public class ContactHelper extends HelperBase {
         }
         return result;
     }
+
+
+    public String getAddresses(ContactData contact) {
+        openHomePage();
+        selectContact(contact);
+        initContactModification(contact);
+        var address = manager.driver.findElement(By.name("address")).getText();
+        var address2 = manager.driver.findElement(By.name("address2")).getText();
+
+        return address+address2;
+    }
+
+    public String getAddress(ContactData contact) {
+        openHomePage();
+        selectContact(contact);
+        initContactModification(contact);
+        var address = manager.driver.findElement(By.name("address")).getText();
+        return address;
+    }
+
+    public String getEmailsFromEditForm(ContactData contact) {
+        openHomePage();
+        selectContact(contact);
+        initContactModification(contact);
+        var email = manager.driver.findElement(By.name("email")).getAttribute("value");
+        var email2 = manager.driver.findElement(By.name("email2")).getAttribute("value");
+        var email3 = manager.driver.findElement(By.name("email3")).getAttribute("value");
+
+        return email+email2+email3;
+
+    }
+
+    public String getEmailsFromHomePage(ContactData contact) {
+        openHomePage();
+        return manager.driver.findElement(By.xpath(
+                String.format("//input[@id='%s']/../../td[5]", contact.id()))).getText().replaceAll("\\r\\n|\\r|\\n", "");
+    }
+
+    public String getAddressFromHomePage(ContactData contact) {
+        openHomePage();
+        return manager.driver.findElement(By.xpath(
+                String.format("//input[@id='%s']/../../td[4]", contact.id()))).getText().replaceAll("\\r\\n|\\r|\\n", "");
+    }
+
+
 }
