@@ -24,9 +24,9 @@ public class ContactRecord {
 
     public String address = "";
 
-    public String mobile = "";
+    public String mobile;
 
-    public String work= "";
+    public String work;
 
     public String fax = "";
     public String email = "";
@@ -44,7 +44,7 @@ public class ContactRecord {
     public String amonth = "";
     public String ayear = "";
     public String address2 = "";
-    public String phone2= "";
+    public String phone2;
     public String notes = "";
     public String photo = "";
 
@@ -53,17 +53,18 @@ public class ContactRecord {
 
 
 
-
-
-
     public ContactRecord() {}
-    public ContactRecord(int id, String firstname, String middlename, String lastname, String photo) {
+    public ContactRecord(int id, String firstname, String middlename, String lastname, String photo, String home, String mobile, String work, String phone2) {
 
         this.id = id;
         this.firstname = firstname;
         this.middlename = middlename;
         this.lastname = lastname;
         this.photo = photo;
+        this.home = home;
+        this.mobile = mobile;
+        this.work = work;
+        this.phone2 = phone2;
     }
 
 }
