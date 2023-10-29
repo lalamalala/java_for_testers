@@ -23,15 +23,14 @@ public class ContactInfoTests extends TestBase {
         }
 
         var contacts = app.hbm().getContactList();
+        var expected = contacts.stream().collect(Collectors.toMap(ContactData::id, contact ->
+            Stream.of(contact.home(), contact.mobile(), contact.work(), contact.secondary())
+                    .filter(s -> s != null && !"".equals(s))
+                    .collect(Collectors.joining("\n"))
+        ));
 
-
-        var contact = contacts.get(0);
-        var phones = app.contacts().getPhones(contact);
-
-        var expected = Stream.of(contact.home(), contact.mobile(), contact.work(), contact.secondary())
-                .filter(s-> s != null && ! "".equals(s))
-                .collect(Collectors.joining("\n"));
-        Assertions.assertEquals(expected, phones);
+        var phones = app.contacts().getPhones();
+        Assertions.assertEquals(expected,phones);
 
     }
 
