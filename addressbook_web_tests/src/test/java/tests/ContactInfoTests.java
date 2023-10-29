@@ -16,8 +16,10 @@ public class ContactInfoTests extends TestBase {
                     .withFirstName(CommonFunctions.randomString(10))
                     .withLastName(CommonFunctions.randomString(10))
                     .withPhoto(randomFile("src/test/resources/images"))
-                    .withHome("123456")
-                    .withWork("123456"));
+                    .withHome("1234567")
+                    .withWork("1234567")
+                    .withMobile("123")
+                    .withSecondary("12"));
         }
 
         var contacts = app.hbm().getContactList();

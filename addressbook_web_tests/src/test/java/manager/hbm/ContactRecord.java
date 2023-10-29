@@ -22,10 +22,10 @@ public class ContactRecord {
     public String title = "";
 
     public String address = "";
-    public String home = "";
+    public String home ="";
     public String mobile = "";
 
-    public String work = "";
+    public String work= "";
 
     public String fax = "";
     public String email = "";
@@ -43,7 +43,7 @@ public class ContactRecord {
     public String amonth = "";
     public String ayear = "";
     public String address2 = "";
-    public String phone2 = "";
+    public String phone2= "";
     public String notes = "";
     public String photo = "";
 
