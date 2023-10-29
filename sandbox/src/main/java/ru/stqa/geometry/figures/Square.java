@@ -16,6 +16,11 @@ public record Square (double side) {
         System.out.println(text);
     }
 
+    public static void printPerimeter(Square s) {
+        String text = String.format("Perimeter of a square with sides %f = %f", s.side, s.perimeter());
+        System.out.println(text);
+    }
+
     // double  - in the function, indicate the type of the returned result (expression)
 
     public double area() {
