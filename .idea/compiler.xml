@@ -4,6 +4,8 @@
     <bytecodeTargetLevel target="16">
       <module name="addressbook_web_tests_main" target="17" />
       <module name="addressbook_web_tests_test" target="17" />
+      <module name="mantis_tests_main" target="17" />
+      <module name="mantis_tests_test" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>
