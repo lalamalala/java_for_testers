@@ -17,4 +17,11 @@ public class SessionHelper extends HelperBase{
     public boolean isLoggedIn() {
         return isElementPresent(By.cssSelector("span.user-info"));
     }
+
+    public void signup(String username, String email) {
+        click(By.xpath("//*[@id='login-box']/div/div[2]/a"));
+        type(By.name("username"), username);
+        type(By.name("email"), email);
+        click(By.cssSelector("input[type='submit']"));
+    }
 }
