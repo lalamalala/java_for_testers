@@ -13,7 +13,8 @@ public class UserRegistrationTests extends TestBase{
         var username = String.format(CommonFunctions.randomString(8));
         var email = String.format("%s@localhost", username);
        //create user on post server
-       app.jamesCli().addUser(email, "password");
+  //     app.jamesCli().addUser(email, "password");
+        app.jamesApi().addUser(email, "password");
        app.session().signup(username, email);
 
         var messages = app.mail().receive(email, "password", Duration.ofSeconds(10));
