@@ -24,7 +24,7 @@ public class UserRegistrationTests extends TestBase{
         var url = CommonFunctions.extractUrl(message);
 
         app.session().finishedRegistration(url, user.name(), password);
-        
+
         app.http().login(user.name(), password);
         Assertions.assertTrue(app.http().isLoggedIn());
         
