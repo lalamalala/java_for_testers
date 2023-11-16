@@ -58,8 +58,8 @@ public class RestApiHelper extends HelperBase {
          //   System.out.println(result);
             apiInstance.userAdd(body);
         } catch (ApiException e) {
-            new RuntimeException(e);
-
+            System.err.println("Exception when calling UserApi#userDelete");
+            e.printStackTrace();
         }
 
     }

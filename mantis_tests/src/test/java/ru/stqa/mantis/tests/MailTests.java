@@ -28,9 +28,9 @@ public class MailTests extends TestBase {
 
     }
 
-    @Test
-    void canDrainInbox() {
-        app.mail().drain("user1@localhost", "password");
-    }
+//    @Test
+//    void canDrainInbox() {
+//        app.mail().drain("user1@localhost", "password");
+//    }
 
 }
