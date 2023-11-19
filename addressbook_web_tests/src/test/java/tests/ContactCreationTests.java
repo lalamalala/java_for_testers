@@ -90,7 +90,17 @@ public class ContactCreationTests extends TestBase{
 
 
         var expectedList = new ArrayList<>(oldContacts);
-        expectedList.add(contact.withId(newContacts.get(newContacts.size() - 1).id()).withPhoto("src/test/resources/images/avatar.png"));
+        expectedList.add(contact.withId(newContacts.get(newContacts.size() - 1).id())
+                .withPhoto("src/test/resources/images/avatar.png")
+                .withHome("")
+                .withMobile("")
+                .withWork("")
+                .withEmail("")
+                .withEmail2("")
+                .withEmail3("")
+                .withSecondary("")
+                .withPostAddress("")
+                .withPostAddress2(""));
         expectedList.sort(compareById);
 
         Assertions.assertEquals(newContacts, expectedList);

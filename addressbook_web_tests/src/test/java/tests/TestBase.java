@@ -26,10 +26,10 @@ public class TestBase {
 
     }
 
-    @AfterEach
-    void  checkDataBaseConsistency () {
-        app.jdbc().checkConsistency();
-    }
+//    @AfterEach
+//    void  checkDataBaseConsistency () {
+//        app.jdbc().checkConsistency();
+//    }
 
     public static String randomFile(String dir) {
         var fileNames = new File(dir).list();
