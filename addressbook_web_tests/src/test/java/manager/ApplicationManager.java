@@ -2,8 +2,13 @@ package manager;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Properties;
 
 public class ApplicationManager {
@@ -53,13 +58,23 @@ public class ApplicationManager {
         return hbm;
     }
 
-    public void init(String browser, Properties properties) {
+    public void init(String browser, Properties properties) throws MalformedURLException {
         this.properties = properties;
         if (driver == null) {
+            var seleniumServer = properties.getProperty("seleniumServer");
             if ("chrome".equals(browser)) {
-                driver = new ChromeDriver();
+                if (seleniumServer != null) {
+                    driver = new RemoteWebDriver(new URL(seleniumServer), new ChromeOptions());
+                } else {
+                    driver = new ChromeDriver();
+                }
+
             } else if ("firefox".equals(browser)) {
+                if (seleniumServer != null) {
+                    driver = new RemoteWebDriver(new URL(seleniumServer), new FirefoxOptions());
+                } else {
                     driver = new FirefoxDriver();
+                }
 
             } else {
                 throw  new IllegalArgumentException(String.format("Unknown browser %s", browser));
